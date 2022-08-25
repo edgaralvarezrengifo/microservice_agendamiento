@@ -1,9 +1,26 @@
+
+
 module.exports = mongoose => {
+    var schemaproduct = mongoose.Schema(
+        {
+          name: String,
+          image: String,
+          quantiy: Number
+        },
+        { timestamps: true }
+      );
+ 
     var schema = mongoose.Schema(
       {
-        title: String,
-        description: String,
-        published: Boolean
+        orderNumber: String,
+        orderDate: String,
+        city: String,
+        addres:String,
+        complementAddress: String,
+        customerName: String,
+        phone: Number,
+        email: String,
+        products : [schemaproduct]
       },
       { timestamps: true }
     );
@@ -12,6 +29,6 @@ module.exports = mongoose => {
       object.id = _id;
       return object;
     });
-    const order = mongoose.model("order", schema);
+    const order = mongoose.model("orders", schema);
     return order;
   };

@@ -12,6 +12,6 @@ module.exports = mongoose => {
       object.id = _id;
       return object;
     });
-    const schedulingOrder = mongoose.model("schedulingorder", schema);
+    const schedulingOrder = mongoose.model("schedulingorders", schema);
     return schedulingOrder;
   };

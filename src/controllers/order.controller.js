@@ -1,17 +1,25 @@
 const db = require("../entity");
 const Order = db.orders;
-// Create and Save a new Tutorial
+// Create and Save a new orer
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.title) {
+    if (!req.body.orderNumber) {
       res.status(400).send({ message: "Content can not be empty!" });
       return;
     }
-    // Create a Tutorial
+
+    
+    // Create a new order
     const order = new Order({
-      title: req.body.title,
-      description: req.body.description,
-      published: req.body.published ? req.body.published : false
+        orderNumber:req.body.orderNumber,
+        orderDate: req.body.orderDate,
+        city: req.body.city,
+        addres:req.body.addres,
+        complementAddress: req.body.complementAddress,
+        customerName: req.body.customerName,
+        phone: req.body.phone,
+        email: req.body.email,
+        products :req.body.products
     });
     // Save Tutorial in the database
     order

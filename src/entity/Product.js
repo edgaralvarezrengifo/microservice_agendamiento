@@ -1,9 +1,9 @@
 module.exports = mongoose => {
     var schema = mongoose.Schema(
       {
-        title: String,
-        description: String,
-        published: Boolean
+        name: String,
+        image: String,
+        quantiy: Number
       },
       { timestamps: true }
     );
@@ -12,6 +12,6 @@ module.exports = mongoose => {
       object.id = _id;
       return object;
     });
-    const product = mongoose.model("product", schema);
+    const product = mongoose.model("products", schema);
     return product;
   };
