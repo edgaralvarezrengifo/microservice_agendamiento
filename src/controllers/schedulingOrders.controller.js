@@ -1,23 +1,51 @@
 const db = require("../entity");
 const schedulingOrder = db.scheduling;
+const ip = require("ip");
+const ipaddress =ip.address();
 // Create and Save a new Tutorial
-exports.create = (req, res) => {
+exports.create = async(req, res) => {
     // Validate request
-    if (!req.body.title) {
+    console.log(req.body);
+    if (!req.body.orderNumber) {
       res.status(400).send({ message: "Content can not be empty!" });
       return;
     }
-    // Create a Tutorial
+    //call api Delivery
+
+
+    const body = JSON.stringify({regex: "\\w{6,6}","records": 1});
+
+    const axios = require('axios');
+
+    var response= await  axios
+      .post('https://random.api.randomkey.io/v1/regex',
+            body,
+            {headers: {'Content-Type': 'application/json','auth': '2990d21d608e209b0e6989f7d0d8e6ba'}});
+
+      const data =response.data;
+
+      console.log(data);
+
+      if ( typeof data == 'undefined') {
+        res.status(400).send({ message: "Proveedor de entregas no responde" });
+        return;
+      }
+      
+    // Create a scheduler
     const SchedulingOrder = new schedulingOrder({
-      title: req.body.title,
-      description: req.body.description,
-      published: req.body.published ? req.body.published : false
+     
+      SchedulNumber: data.regex,
+      orderNumber: req.body.title,
+      DeliveryDate:req.body.orderDate,
+      Statatus: "In progress",
+      TransportaionSupplier : "ServiEntrega",
+      TrackingId : data.regex
     });
     // Save Tutorial in the database
     SchedulingOrder
       .save(SchedulingOrder)
       .then(data => {
-        res.send(data);
+        res.status(200).send({data,ipserver:ipaddress});
       })
       .catch(err => {
         res.status(500).send({
@@ -48,7 +76,7 @@ exports.findOne = (req, res) => {
       .then(data => {
         if (!data)
           res.status(404).send({ message: "Not found Tutorial with id " + id });
-        else res.send(data);
+        else res.send({data,ipserver:ipaddress});
       })
       .catch(err => {
         res
