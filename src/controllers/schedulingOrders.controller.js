@@ -35,7 +35,7 @@ exports.create = async(req, res) => {
     const SchedulingOrder = new schedulingOrder({
      
       SchedulNumber: data.regex,
-      orderNumber: req.body.title,
+      orderNumber: req.body.orderNumber,
       DeliveryDate:req.body.orderDate,
       Statatus: "In progress",
       TransportaionSupplier : "ServiEntrega",
