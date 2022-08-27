@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
 var cors = require("cors");
 var app = express();
-var port = 80;
+var port = 80001;
 app.use(cors({
     origin: ['*']
 }));
