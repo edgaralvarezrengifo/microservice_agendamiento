@@ -7,7 +7,7 @@ var port = 80;
 app.use(cors({
     origin: ['*']
 }));
-const hostname="18.223.143.161";
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 var db = require("./entity");
@@ -27,4 +27,4 @@ require("./routes/order.routes")(app);
 require("./routes/product.routes")(app);
 require("./routes/schedulingOrder.routes")(app);
     
-app.listen(port,hostname);
+app.listen(port);
