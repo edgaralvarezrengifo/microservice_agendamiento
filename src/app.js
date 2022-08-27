@@ -7,7 +7,7 @@ var port = 80;
 app.use(cors({
     origin: ['*']
 }));
-const hostname="18.224.180.51";
+const hostname="18.223.143.161";
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 var db = require("./entity");
