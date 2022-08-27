@@ -9,7 +9,7 @@ module.exports = mongoose => {
         },
         { timestamps: true }
       );
- 
+    
     var schema = mongoose.Schema(
       {
         orderNumber: String,
