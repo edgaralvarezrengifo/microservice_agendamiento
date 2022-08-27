@@ -3,9 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
 var cors = require("cors");
 var app = express();
-var port = 8001;
+var port = 80;
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:8080', 'http://localhost:4200']
+    origin: ['*']
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -25,5 +25,5 @@ db.mongoose
 require("./routes/order.routes")(app);
 require("./routes/product.routes")(app);
 require("./routes/schedulingOrder.routes")(app);
-console.log('listening to port :8001');
+
 app.listen(port);
